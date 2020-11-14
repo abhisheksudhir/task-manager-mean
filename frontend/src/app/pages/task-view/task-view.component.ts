@@ -1,4 +1,6 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { TaskService } from 'src/app/task.service';
 
 @Component({
@@ -7,13 +9,24 @@ import { TaskService } from 'src/app/task.service';
   styleUrls: ['./task-view.component.scss'],
 })
 export class TaskViewComponent implements OnInit {
-  constructor(private taskService: TaskService) {}
+  lists: any[];
+  tasks: any[];
 
-  ngOnInit(): void {}
+  constructor(
+    private taskService: TaskService,
+    private route: ActivatedRoute
+  ) {}
 
-  createNewList() {
-    return this.taskService.createList('testing').subscribe((response: any) => {
-      console.log(response);
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      console.log(params);
+      this.taskService.getTasks(params.listId).subscribe((tasks: any[])=> {
+        this.tasks = tasks;
+      });
+    });
+
+    this.taskService.getLists().subscribe((lists: any[]) => {
+      this.lists = lists;
     });
   }
 }
