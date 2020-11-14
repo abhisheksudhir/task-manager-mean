@@ -23,13 +23,21 @@
       <h1 class="title has-text-primary">Tasks</h1>
 
       <!-- Task Elements -->
-      <div class="task" *ngFor="let task of tasks">
+      <div
+        class="task"
+        *ngFor="let task of tasks"
+        (click)="onTaskClick(task)"
+        [ngClass]="{ completed: task.completed }"
+      >
         <div class="task-text">
           <p>{{ task.title }}</p>
         </div>
       </div>
-      <button routerLink="./new-task" class="circle-add-button button is-primary">
-        <img src="../../../assets/plus-icon.svg" class="has-text-white">
+      <button
+        routerLink="./new-task"
+        class="circle-add-button button is-primary"
+      >
+        <img src="../../../assets/plus-icon.svg" class="has-text-white" />
       </button>
     </div>
   </div>
