@@ -328,7 +328,7 @@ app.delete("/lists/:listId/tasks/:taskId", authenticate, (req, res) => {
     .then((list) => {
       if (list) {
         // list object with the specified conditions was found
-        // therefore the currently authenticated user can make updates to tasks within this list
+        // therefore the currently authenticated user can delete tasks within this list
         return true;
       }
 
