@@ -21,9 +21,13 @@ export class TaskViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.taskService.getTasks(params.listId).subscribe((tasks: Task)=> {
-        this.tasks = tasks;
-      });
+      if (params.listId) {
+        this.taskService.getTasks(params.listId).subscribe((tasks: Task) => {
+          this.tasks = tasks;
+        });
+      } else {
+        this.tasks = undefined;
+      }
     });
 
     this.taskService.getLists().subscribe((lists: List) => {
@@ -35,6 +39,6 @@ export class TaskViewComponent implements OnInit {
     this.taskService.complete(task).subscribe(() => {
       // console.log("Toggled task status!");
       task.completed = !task.completed;
-    })
+    });
   }
 }
