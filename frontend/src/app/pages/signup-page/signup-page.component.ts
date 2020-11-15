@@ -17,8 +17,8 @@ export class SignupPageComponent implements OnInit {
 
   onSignupButtonClicked(email: string, password: string) {
     this.authService.signup(email, password).subscribe((res: HttpResponse<any>) => {
+      this.router.navigate(['/lists']);
       console.log(res);
-      // this.router.navigate(['/lists']);
     });
   }
 
